@@ -1,24 +1,50 @@
-const getGoals = (req, res) => {
-  res.status(200).json({ status: "OK" });
-};
+const expressAsyncHandler = require("express-async-handler");
+const Goal = require("../models/goalModel");
 
-const setGoal = (req, res) => {
+const getGoals = expressAsyncHandler(async (req, res) => {
+  const goals = await Goal.find({});
+  res.json(goals);
+});
+
+const setGoal = expressAsyncHandler(async (req, res) => {
+  //validation: if text field is empty, throw an error.
   if (!req.body.text) {
     res.status(400);
     throw new Error("Text field is empty.");
   }
 
-  const newGoal = req.body.text;
+  //validation: check if the goal already exist.
+  const existingGoal = await Goal.findOne({ text: req.body.text });
+  if (existingGoal) {
+    res.status(400);
+    throw new Error("Goal already exist in the database.");
+  }
+
+  const newGoal = await Goal.create({
+    text: req.body.text,
+  });
+
   res.status(200).json(newGoal);
-};
+});
 
-const updateGoal = (req, res) => {
+const updateGoal = expressAsyncHandler(async (req, res) => {
   res.status(200).json({ message: `${req.params.id} update goal.` });
-};
+});
 
-const deleteGoal = (req, res) => {
-  res.status(200).json({ message: `${req.params.id} delete goal.` });
-};
+const deleteGoal = expressAsyncHandler(async (req, res) => {
+  const goal = await Goal.findById(req.params.id);
+  //check if the specified goal is in the database.
+  if (!goal) {
+    res.status(400);
+    throw new Error("Goal not found.");
+  }
+
+  //delete goal.
+  await goal.remove();
+  res.status(200).json({
+    message: `The goal '${goal.text}' with the ID of ${req.params.id} has been deleted`,
+  });
+});
 
 module.exports = {
   getGoals,
