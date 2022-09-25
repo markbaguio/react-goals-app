@@ -1,11 +1,15 @@
 import { Typography, Box, Paper } from "@mui/material";
 
-const GoalComponent = ({ goals }) => {
+const GoalComponent = ({ goal }) => {
+  /**
+   * this should be a card component.
+   */
   return (
     <>
-      <Box width="100%" height="100%" backgroundColor="gray">
+      <Box width="100%" height="500px">
         <Paper>
-          <Typography variant="h6">{goals.text}</Typography>
+          <Typography variant="h3">{goal.text}</Typography>
+          <Typography variant="caption">Goal ID: {goal._id}</Typography>
         </Paper>
       </Box>
     </>

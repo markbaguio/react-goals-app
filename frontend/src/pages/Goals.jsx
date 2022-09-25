@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Grid, Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import GoalComponent from "../components/GoalComponent";
 
@@ -6,6 +6,10 @@ const Goals = () => {
   const [goals, setGoals] = useState([]);
 
   //fetching data from the backend.
+  /**
+   * the api is asychronous, therefore, we can't render the data on mount.
+   * It has to be saved or passed to a child component.
+   */
   useEffect(() => {
     fetch("/api/goals")
       .then((response) => response.json())
@@ -17,10 +21,20 @@ const Goals = () => {
   }, []);
   return (
     <>
-      <Box>
-        <Typography variant="h4">Goals</Typography>
-        <GoalComponent goals={goals} />
-      </Box>
+      <Container maxWidth="lg">
+        <Box>
+          <Typography variant="h4" gutterBottom>
+            Goals
+          </Typography>
+          <Grid container spacing={5}>
+            {goals.map((goal) => (
+              <Grid item lg={3} key={goal._id}>
+                <GoalComponent goal={goal} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
     </>
   );
 };
