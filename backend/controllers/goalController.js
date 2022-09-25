@@ -28,7 +28,15 @@ const setGoal = expressAsyncHandler(async (req, res) => {
 });
 
 const updateGoal = expressAsyncHandler(async (req, res) => {
-  res.status(200).json({ message: `${req.params.id} update goal.` });
+  const newGoal = req.body.text;
+  const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, {
+    text: newGoal,
+  });
+
+  res.status(200).json({
+    message: `Goal updated to: ${newGoal}`,
+    updatedGoal: updatedGoal,
+  });
 });
 
 const deleteGoal = expressAsyncHandler(async (req, res) => {
