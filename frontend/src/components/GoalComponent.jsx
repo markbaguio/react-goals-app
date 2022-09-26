@@ -10,6 +10,10 @@ const GoalComponent = ({ goal, goalCount }) => {
   /**
    * this should be a card component.
    */
+
+  const handleDelete = () => {
+    //delete goal on the database.
+  };
   return (
     <>
       <Card sx={{ maxWidth: "350px" }}>
@@ -21,7 +25,7 @@ const GoalComponent = ({ goal, goalCount }) => {
           <Typography variant="caption">Goal ID: {goal._id}</Typography>
         </CardContent>
         <CardActions>
-          <Button>Delete</Button>
+          <Button onClick={handleDelete}>Delete</Button>
           <Button>Edit</Button>
         </CardActions>
       </Card>

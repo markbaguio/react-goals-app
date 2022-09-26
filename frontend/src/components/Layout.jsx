@@ -46,14 +46,46 @@ const Layout = ({ children }) => {
           left: 0,
           bottom: 0,
           right: 0,
-          backgroundColor: "red",
+          // backgroundColor: "gray",
           maxHeight: "500px",
+          backgroundColor: "#242526",
         }}
       >
         <Box width="100%">
-          <Grid container>
-            <Grid item>hello</Grid>
-            <Grid item>hello</Grid>
+          <Grid container spacing={3}>
+            <Grid item lg={12} marginTop="2rem">
+              <a
+                href="/"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <Typography
+                  align="center"
+                  gutterBottom
+                  variant="h6"
+                  sx={{
+                    ":hover": {
+                      color: "#364966",
+                      transition: "0.5s all ease-in-out",
+                    },
+                  }}
+                >
+                  &copy; 2022 Mark Godwin C. Baguio
+                </Typography>
+              </a>
+            </Grid>
+            <Grid item lg={12}>
+              <Box
+                width="100%"
+                display="flex"
+                justifyContent="center"
+                marginBottom="2rem"
+              >
+                Icons
+              </Box>
+            </Grid>
           </Grid>
         </Box>
       </footer>
