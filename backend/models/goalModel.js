@@ -9,6 +9,7 @@ const goalSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    // timestamps: { currentTime: () => Date.now() },
   }
 );
 
