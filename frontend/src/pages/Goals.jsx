@@ -19,18 +19,31 @@ const Goals = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  let goalCount = 0;
+
+  const incrementGoalCount = () => {
+    goalCount++;
+  };
   return (
     <>
       <Container maxWidth="lg">
-        <Box>
-          <Typography variant="h4" gutterBottom>
+        <Box data-aos="slide-up" height="100%">
+          <Typography variant="h1" gutterBottom>
             Goals
           </Typography>
           <Grid container spacing={5}>
             {goals.map((goal) => (
-              <Grid item lg={3} key={goal._id}>
-                <GoalComponent goal={goal} />
-              </Grid>
+              <>
+                {incrementGoalCount()}
+                <Grid item lg={3} key={goal._id}>
+                  <GoalComponent
+                    goal={goal}
+                    incrementGoalCount={incrementGoalCount}
+                    goalCount={goalCount}
+                  />
+                </Grid>
+              </>
             ))}
           </Grid>
         </Box>
