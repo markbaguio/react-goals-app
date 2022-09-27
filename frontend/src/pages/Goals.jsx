@@ -56,7 +56,7 @@ const Goals = () => {
             {goals.map((goal) => (
               <React.Fragment key={goal._id}>
                 {incrementGoalCount()}
-                <Grid item lg={12}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                   <GoalComponent
                     goal={goal}
                     // incrementGoalCount={incrementGoalCount}

@@ -15,7 +15,14 @@ const GoalComponent = ({ goal, goalCount, handleDelete }) => {
 
   return (
     <>
-      <Card sx={{ maxWidth: "100%" }}>
+      <Card
+        sx={{
+          maxWidth: "100%",
+          // borderBottom: "3px solid #7b1fa2",
+          // borderRight: "3px solid #7b1fa2",
+          display: "block",
+        }}
+      >
         <CardContent>
           <Typography variant="h4">{goalCount}</Typography>
           <Typography variant="h5" gutterBottom>

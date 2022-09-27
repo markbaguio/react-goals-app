@@ -6,6 +6,10 @@ const goalSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter a text."],
     },
+    // important: {
+    //   type: Boolean,
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
