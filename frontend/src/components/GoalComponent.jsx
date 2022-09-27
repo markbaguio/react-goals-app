@@ -6,26 +6,26 @@ import {
   CardActions,
 } from "@mui/material";
 
-const GoalComponent = ({ goal, goalCount }) => {
+const GoalComponent = ({ goal, goalCount, handleDelete }) => {
   /**
    * this should be a card component.
    */
 
-  const handleDelete = () => {
-    //delete goal on the database.
-  };
+  let date = new Date();
+
   return (
     <>
-      <Card sx={{ maxWidth: "350px" }}>
+      <Card sx={{ maxWidth: "100%" }}>
         <CardContent>
           <Typography variant="h4">{goalCount}</Typography>
           <Typography variant="h5" gutterBottom>
             {goal.text}
           </Typography>
-          <Typography variant="caption">Goal ID: {goal._id}</Typography>
+          <Typography variant="body2">Goal ID: {goal._id}</Typography>
+          <Typography variant="body2">Created at: {goal.createdAt}</Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={handleDelete}>Delete</Button>
+          <Button onClick={() => handleDelete(goal._id)}>Delete</Button>
           <Button>Edit</Button>
         </CardActions>
       </Card>

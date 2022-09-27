@@ -6,8 +6,10 @@ import {
   Button,
   useMediaQuery,
   Grid,
+  IconButton,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import goalsLogo from "../assets/images/Goalslogo.png";
 
 const Layout = ({ children }) => {
   return (
@@ -20,9 +22,16 @@ const Layout = ({ children }) => {
           }}
         >
           <Toolbar>
-            <Typography variant="h5" flexGrow="1">
+            {/* <Typography variant="h5" flexGrow="1">
               Goals App
-            </Typography>
+            </Typography> */}
+            {/* <IconButton sx={{ flexGrow: 1, alignContent: "start" }}> */}
+            <Box flexGrow="1">
+              <IconButton disableRipple LinkComponent={Link} to="/">
+                <img src={goalsLogo} alt="logo" width="50px" />
+              </IconButton>
+            </Box>
+            {/* </IconButton> */}
             <Box
               //   backgroundColor="gray"
               width="300px"
@@ -40,14 +49,13 @@ const Layout = ({ children }) => {
         </AppBar>
       </Box>
       {children}
-      <footer
+      {/* <footer
         style={{
           position: "absolute",
           left: 0,
           bottom: 0,
           right: 0,
           // backgroundColor: "gray",
-          maxHeight: "500px",
           backgroundColor: "#242526",
         }}
       >
@@ -88,7 +96,7 @@ const Layout = ({ children }) => {
             </Grid>
           </Grid>
         </Box>
-      </footer>
+      </footer> */}
     </>
   );
 };
