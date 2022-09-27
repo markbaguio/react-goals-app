@@ -5,7 +5,6 @@ import {
   Typography,
   Button,
   useMediaQuery,
-  Grid,
   IconButton,
 } from "@mui/material";
 import { Link } from "react-router-dom";
