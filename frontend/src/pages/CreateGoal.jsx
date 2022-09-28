@@ -1,9 +1,44 @@
-import { Typography, Container, TextField, Box, Button } from "@mui/material";
+import {
+  Typography,
+  Container,
+  TextField,
+  Box,
+  Button,
+  Snackbar,
+  IconButton,
+} from "@mui/material";
 import { useState } from "react";
+import CheckIcon from "@mui/icons-material/Check";
 
 const CreateGoal = () => {
   const [newGoal, setNewGoal] = useState("");
   const [goalError, setGoalError] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  //POST goal
+  const postGoal = () => {
+    fetch("api/goals", {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        //database fieldname should be specified.
+        text: newGoal,
+      }),
+    })
+      .then((response) => {
+        console.log(
+          `status: ${response.ok === true ? "success" : "unsuccessful"}`
+        );
+        response.json();
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,24 +50,17 @@ const CreateGoal = () => {
 
     if (newGoal) {
       console.log(newGoal);
-      fetch("api/goals", {
-        method: "POST",
-        headers: {
-          // Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          //database fieldname should be specified.
-          text: newGoal,
-        }),
-      })
-        .then((response) => {
-          console.log(`status: ${response.ok}`);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      postGoal();
+      setOpenSnackbar(true);
     }
+  };
+
+  const handleSnackbarExit = (event, reason) => {
+    if (reason !== "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
   };
   return (
     <>
@@ -59,6 +87,12 @@ const CreateGoal = () => {
           <Button type="submit" variant="outlined" size="large">
             Create Goal
           </Button>
+          <Snackbar
+            message="Goal created!"
+            autoHideDuration={5000}
+            open={openSnackbar}
+            onClose={handleSnackbarExit}
+          />
         </form>
       </Container>
     </>

@@ -16,7 +16,7 @@ const setGoal = expressAsyncHandler(async (req, res) => {
   //validation: check if the goal already exist.
   const existingGoal = await Goal.findOne({ text: req.body.text });
   if (existingGoal) {
-    res.status(400);
+    res.status(409);
     throw new Error("Goal already exist in the database.");
   }
 
